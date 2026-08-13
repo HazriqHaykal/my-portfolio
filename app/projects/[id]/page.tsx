@@ -153,7 +153,7 @@ function Reveal({ children, className = "", delay = 0 }: RevealProps) {
       ref={ref}
       style={{ transitionDelay: `${delay}ms` }}
       className={`transition-all duration-700 ease-out ${
-        isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+        isVisible ? "translate-y-0 opacity-100 blur-none" : "translate-y-8 opacity-0 blur-sm"
       } ${className}`}
     >
       {children}
@@ -180,10 +180,10 @@ export default function ProjectDetail() {
 
   if (!project) {
     return (
-      <main className="relative overflow-x-hidden bg-slate-950 text-slate-100 min-h-screen flex items-center justify-center">
+      <main className="relative overflow-x-hidden bg-background text-foreground min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-4xl font-bold mb-4">Project Not Found</h1>
-          <Link href="/" className="text-cyan-200 hover:text-cyan-100">
+          <Link href="/" className="text-accent hover:text-accent-strong">
             Return to Home
           </Link>
         </div>
@@ -192,23 +192,22 @@ export default function ProjectDetail() {
   }
 
   return (
-    <main className="relative overflow-x-hidden bg-slate-950 text-slate-100">
+    <main className="relative overflow-x-hidden bg-background text-foreground">
       <div className="pointer-events-none absolute inset-0">
         <div
-          className="absolute h-72 w-72 rounded-full bg-cyan-300/10 blur-3xl"
+          className="absolute h-72 w-72 rounded-full bg-accent/8 blur-3xl"
           style={{ left: `calc(${mouse.x}% - 140px)`, top: `calc(${mouse.y}% - 140px)` }}
         />
-        <div className="absolute -right-20 top-20 h-80 w-80 rounded-full bg-blue-400/10 blur-3xl" />
-        <div className="absolute -left-20 bottom-0 h-72 w-72 rounded-full bg-orange-300/10 blur-3xl" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:44px_44px]" />
+        <div className="float-orb-a absolute -right-20 top-20 h-80 w-80 rounded-full bg-accent-strong/6 blur-3xl" />
+        <div className="float-orb-b absolute -left-20 bottom-0 h-72 w-72 rounded-full bg-accent-soft/6 blur-3xl" />
       </div>
 
-      <header className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/70 backdrop-blur-xl">
+      <header className="sticky top-0 z-50 border-b border-white/10 bg-background/70 backdrop-blur-xl">
         <nav className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-4">
-          <Link href="/" className="text-lg font-bold tracking-tight text-white hover:text-cyan-200 transition">
+          <Link href="/" className="text-lg font-bold tracking-tight text-foreground hover:text-accent transition">
             Hazriq Haykal
           </Link>
-          <Link href="/#featured" className="text-sm text-slate-300 hover:text-cyan-200 transition rounded-full px-3 py-1 hover:bg-white/10">
+          <Link href="/#featured" className="text-sm text-muted hover:text-accent transition rounded-full px-3 py-1 hover:bg-white/10">
             Back to Projects
           </Link>
         </nav>
@@ -217,16 +216,16 @@ export default function ProjectDetail() {
       <section className="mx-auto max-w-4xl px-6 pt-20 pb-20">
         <Reveal>
           <div className="mb-8">
-            <p className="text-cyan-200 text-sm font-semibold uppercase tracking-widest mb-2">{project.subtitle}</p>
-            <h1 className="text-5xl md:text-6xl font-black mb-4">{project.title}</h1>
-            <p className="text-lg text-slate-300 leading-relaxed">{project.fullDescription}</p>
+            <p className="text-accent text-sm font-semibold uppercase tracking-widest mb-2">{project.subtitle}</p>
+            <h1 className="hero-title text-5xl md:text-6xl font-black mb-4">{project.title}</h1>
+            <p className="text-lg text-muted leading-relaxed">{project.fullDescription}</p>
           </div>
         </Reveal>
 
         <Reveal delay={150}>
           <div className="flex flex-wrap gap-2 mb-12">
             {project.tags.map((tag) => (
-              <span key={tag} className="rounded-full border border-cyan-300/40 bg-cyan-300/10 px-4 py-2 text-sm font-medium text-cyan-200">
+              <span key={tag} className="rounded-full border border-accent/40 bg-accent/10 px-4 py-2 text-sm font-medium text-accent">
                 {tag}
               </span>
             ))}
@@ -240,8 +239,8 @@ export default function ProjectDetail() {
               {project.features.map((feature, index) => (
                 <Reveal key={feature.title} delay={300 + index * 80}>
                   <div className="rounded-lg border border-white/10 bg-white/5 p-4">
-                    <h3 className="font-semibold text-cyan-200 text-lg mb-2">{feature.title}</h3>
-                    <p className="text-slate-300 leading-relaxed">{feature.description}</p>
+                    <h3 className="font-semibold text-accent text-lg mb-2">{feature.title}</h3>
+                    <p className="text-muted leading-relaxed">{feature.description}</p>
                   </div>
                 </Reveal>
               ))}
@@ -254,8 +253,8 @@ export default function ProjectDetail() {
             <h2 className="text-2xl font-bold mb-6">Technologies Used</h2>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
               {project.technologies.map((tech) => (
-                <div key={tech} className="rounded-lg border border-emerald-300/30 bg-emerald-300/10 px-4 py-3 text-center">
-                  <span className="font-medium text-emerald-200">{tech}</span>
+                <div key={tech} className="rounded-lg border border-accent/30 bg-accent/10 px-4 py-3 text-center">
+                  <span className="font-medium text-accent">{tech}</span>
                 </div>
               ))}
             </div>
@@ -265,7 +264,7 @@ export default function ProjectDetail() {
         <Reveal delay={800}>
           <Link
             href="/#featured"
-            className="inline-flex items-center gap-2 rounded-xl border border-cyan-300/40 bg-cyan-300/10 px-6 py-3 font-semibold text-cyan-200 transition hover:bg-cyan-300/20 hover:border-cyan-300/60"
+            className="cta-glow inline-flex items-center gap-2 rounded-xl border border-accent/40 bg-accent/10 px-6 py-3 font-semibold text-accent transition hover:bg-accent/20 hover:border-accent/60"
           >
             ← Back to Projects
           </Link>

@@ -21,7 +21,6 @@ const navLinks = [
   { label: "Featured", href: "#featured" },
   { label: "Projects", href: "#projects" },
   { label: "Education", href: "#education" },
-  { label: "Experience", href: "#experience" },
   { label: "Achievements", href: "#achievements" },
   { label: "Skills", href: "#skills" },
   { label: "Contact", href: "#contact" },
@@ -105,23 +104,11 @@ const featuredAchievements = [
     impact: ["Top Innovation Team", "international recognition"],
   },
   {
-    title: "FOSEAL Hackathon Champion",
-    subtitle: "Champion Award",
+    title: "FOSEAL Hackathon Winner",
+    subtitle: "Top 3 Hackathon Team",
     img: "/images/Foseal.jpg",
     year: "2025",
     impact: ["3rd Place Achievement", "First Hackathon First Win"],
-  },
-];
-
-const experience = [
-  {
-    role: "Zara KLCC - Part-time",
-    period: "Jan 2021 - Apr 2021",
-    points: [
-      "Demonstrated strong communication and customer service skills.",
-      "Managed transactions accurately and efficiently.",
-      "Worked effectively in a fast-paced team environment.",
-    ],
   },
 ];
 
@@ -290,7 +277,7 @@ function Reveal({ children, className = "", delay = 0 }: RevealProps) {
       ref={ref}
       style={{ transitionDelay: `${delay}ms` }}
       className={`transition-all duration-700 ease-out ${
-        isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+        isVisible ? "translate-y-0 opacity-100 blur-none" : "translate-y-8 opacity-0 blur-sm"
       } ${className}`}
     >
       {children}
@@ -302,17 +289,17 @@ function SkillBars({ title, items, delay }: { title: string; items: SkillItem[];
   return (
     <Reveal delay={delay}>
       <article className="rounded-2xl border border-white/10 bg-white/5 p-5">
-        <h3 className="text-sm font-semibold uppercase tracking-widest text-cyan-200">{title}</h3>
+        <h3 className="text-sm font-semibold uppercase tracking-widest text-accent">{title}</h3>
         <div className="mt-5 space-y-4">
           {items.map((item) => (
             <div key={`${title}-${item.name}`}>
               <div className="mb-2 flex items-center justify-between text-sm">
-                <span className="font-medium text-slate-100">{item.name}</span>
+                <span className="font-medium text-foreground">{item.name}</span>
                 <span
                   className={`rounded-full px-2 py-0.5 text-xs font-semibold ${
                     item.level === "Advanced"
-                      ? "bg-emerald-300/20 text-emerald-200"
-                      : "bg-blue-300/20 text-blue-200"
+                      ? "bg-accent/20 text-accent"
+                      : "bg-white/10 text-muted"
                   }`}
                 >
                   {item.level}
@@ -320,7 +307,7 @@ function SkillBars({ title, items, delay }: { title: string; items: SkillItem[];
               </div>
               <div className="h-2.5 overflow-hidden rounded-full bg-white/10">
                 <div
-                  className="h-full rounded-full bg-gradient-to-r from-cyan-300 via-sky-300 to-blue-400 shadow-[0_0_20px_rgba(103,232,249,0.45)] transition-[width] duration-1000"
+                  className="skill-fill h-full rounded-full bg-gradient-to-r from-accent via-accent-strong to-accent shadow-[0_0_20px_rgba(242,163,61,0.45)] transition-[width] duration-1000"
                   style={{ width: `${item.percent}%` }}
                 />
               </div>
@@ -347,25 +334,24 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="relative overflow-x-hidden bg-slate-950 text-slate-100">
+    <main className="relative overflow-x-hidden bg-background text-foreground">
       <div className="pointer-events-none absolute inset-0">
         <div
-          className="absolute h-72 w-72 rounded-full bg-cyan-300/10 blur-3xl"
+          className="absolute h-72 w-72 rounded-full bg-accent/8 blur-3xl"
           style={{ left: `calc(${mouse.x}% - 140px)`, top: `calc(${mouse.y}% - 140px)` }}
         />
-        <div className="absolute -right-20 top-20 h-80 w-80 rounded-full bg-blue-400/10 blur-3xl" />
-        <div className="absolute -left-20 bottom-0 h-72 w-72 rounded-full bg-orange-300/10 blur-3xl" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:44px_44px]" />
+        <div className="float-orb-a absolute -right-20 top-20 h-80 w-80 rounded-full bg-accent-strong/6 blur-3xl" />
+        <div className="float-orb-b absolute -left-20 bottom-0 h-72 w-72 rounded-full bg-accent-soft/6 blur-3xl" />
       </div>
 
-      <header className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/70 backdrop-blur-xl">
+      <header className="sticky top-0 z-50 border-b border-white/10 bg-background/70 backdrop-blur-xl">
         <nav className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-4">
-          <a href="#top" className="text-lg font-bold tracking-tight text-white">
+          <a href="#top" className="text-lg font-bold tracking-tight text-foreground">
             Hazriq Haykal
           </a>
-          <div className="flex flex-wrap justify-end gap-2 text-sm text-slate-300">
+          <div className="flex flex-wrap justify-end gap-2 text-sm text-muted">
             {navLinks.map((item) => (
-              <a key={item.href} href={item.href} className="rounded-full px-3 py-1 transition hover:bg-white/10 hover:text-cyan-200">
+              <a key={item.href} href={item.href} className="rounded-full px-3 py-1 transition hover:bg-accent/10 hover:text-accent">
                 {item.label}
               </a>
             ))}
@@ -375,14 +361,14 @@ export default function Home() {
 
       <section id="top" className="relative mx-auto max-w-6xl px-6 pb-20 pt-20 md:pt-24">
         <Reveal>
-          <p className="inline-flex rounded-full border border-cyan-400/30 bg-cyan-400/10 px-3 py-1 text-xs tracking-[0.16em] text-cyan-200">
-            Software Engineering student at UPM | PNB Scholar | Hackathon Finalist | AI & Data Systems Builder
+          <p className="inline-flex rounded-full border border-accent/30 bg-accent/10 px-3 py-1 text-xs tracking-[0.16em] text-accent">
+            UPM Software Engineer | PNB Scholar | Hackathon Winner | AI & Data | Cloud Computing
           </p>
         </Reveal>
 
         <div className="mt-8 grid items-center gap-8 lg:grid-cols-[340px_1fr]">
           <Reveal delay={100} className="relative mx-auto w-full max-w-[340px] lg:mx-0">
-            <div className="absolute -inset-3 rounded-[2rem] bg-gradient-to-br from-cyan-300/20 via-sky-300/10 to-blue-400/10 blur-xl" />
+            <div className="absolute -inset-3 rounded-[2rem] bg-gradient-to-br from-accent/25 via-accent-strong/10 to-accent-soft/10 blur-xl" />
             <div className="relative overflow-hidden rounded-[2rem] border border-white/15 bg-white/5 p-3 shadow-2xl">
               <img
                 src="/images/Profile.jpg"
@@ -393,18 +379,18 @@ export default function Home() {
           </Reveal>
 
           <Reveal delay={180}>
-            <h1 className="max-w-4xl text-4xl font-black leading-[1.05] tracking-tight md:text-6xl">
-              AI-Driven Software Engineer in Progress
+            <h1 className="hero-title max-w-4xl text-4xl font-black leading-[1.05] tracking-tight md:text-6xl">
+              Software Engineer Building Real-World Systems
             </h1>
-            <p className="mt-6 max-w-3xl text-lg leading-relaxed text-slate-300">
-              I design and build intelligent applications that combine machine learning, cloud infrastructure, and user-centered design to solve meaningful problems.
+            <p className="mt-6 max-w-3xl text-lg leading-relaxed text-muted">
+              I build software projects across AI, data, and cloud, with a focus on turning ideas into working systems.
             </p>
             <div className="mt-6 flex flex-wrap gap-3 text-sm">
-              <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-slate-200">UPM Software Engineering</span>
-              <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-slate-200">PNB Scholar</span>
-              <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-slate-200">Hackathon Finalist</span>
-              <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-slate-200">AI & Data Systems Builder</span>
-              <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-slate-200">Cloud & AWS Learner</span>
+              <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-foreground/90">UPM Software Engineering</span>
+              <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-foreground/90">PNB Scholar</span>
+              <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-foreground/90">Hackathon Winner</span>
+              <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-foreground/90">AI & Data </span>
+              <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-foreground/90">Cloud & AWS</span>
             </div>
           </Reveal>
         </div>
@@ -413,22 +399,22 @@ export default function Home() {
       <section id="education" className="mx-auto max-w-6xl border-t border-white/10 px-6 py-20">
         <Reveal>
           <h2 className="text-3xl font-bold tracking-tight">Education</h2>
-          <p className="mt-2 text-slate-300">My academic journey.</p>
+          <p className="mt-2 text-muted">My academic journey.</p>
         </Reveal>
 
         <div className="relative mt-10 pl-10 md:pl-14">
-          <div className="absolute bottom-0 left-3 top-0 w-px bg-gradient-to-b from-cyan-300/70 via-cyan-300/30 to-transparent md:left-5" />
+          <div className="absolute bottom-0 left-3 top-0 w-px bg-gradient-to-b from-accent/70 via-accent/30 to-transparent md:left-5" />
           {education.map((item, index) => (
             <Reveal key={`${item.school}-${item.period}`} delay={index * 100} className="relative mb-6 last:mb-0">
-              <span className="absolute -left-[2.15rem] top-3 h-3 w-3 rounded-full border-2 border-cyan-300 bg-slate-950 md:-left-[2.65rem]" />
+              <span className="timeline-ping absolute -left-[2.15rem] top-3 h-3 w-3 rounded-full border-2 border-accent bg-background md:-left-[2.65rem]" />
               <article className="rounded-2xl border border-white/10 bg-white/5 p-5">
                 <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
-                  <h3 className="font-semibold text-white">{item.school}</h3>
-                  <span className="inline-flex w-fit rounded-full border border-cyan-300/40 bg-cyan-300/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-cyan-200">
+                  <h3 className="font-semibold text-foreground">{item.school}</h3>
+                  <span className="inline-flex w-fit rounded-full border border-accent/40 bg-accent/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-accent">
                     {item.period}
                   </span>
                 </div>
-                <p className="mt-3 text-sm text-slate-300">{item.detail}</p>
+                <p className="mt-3 text-sm text-muted">{item.detail}</p>
               </article>
             </Reveal>
           ))}
@@ -438,28 +424,28 @@ export default function Home() {
       <section id="featured" className="mx-auto max-w-6xl border-t border-white/10 px-6 py-20">
         <Reveal>
           <h2 className="text-3xl font-bold tracking-tight">Featured Projects</h2>
-          <p className="mt-2 text-slate-300">Deep-dive projects with full technical breakdown.</p>
+          <p className="mt-2 text-muted">Deep-dive projects with full technical breakdown.</p>
         </Reveal>
 
         <div className="mt-8 grid gap-6 md:grid-cols-3">
           {featuredProjects.map((project, index) => (
             <Reveal key={project.id} delay={index * 90}>
               <Link href={`/projects/${project.id}`}>
-                <article className="group h-full overflow-hidden rounded-2xl border border-white/10 bg-white/5 transition duration-300 hover:-translate-y-1 hover:border-cyan-300/40 cursor-pointer">
-                  <div className="relative h-40 overflow-hidden bg-gradient-to-br from-cyan-400/20 to-blue-400/10">
-                    <img 
+                <article className="group h-full overflow-hidden rounded-2xl border border-white/10 bg-white/5 transition duration-300 hover:-translate-y-1 hover:border-accent/40 hover:shadow-[0_20px_50px_rgba(242,163,61,0.15)] cursor-pointer">
+                  <div className="relative h-40 overflow-hidden bg-gradient-to-br from-accent/20 to-accent-strong/10">
+                    <img
                       src={project.image}
                       alt={project.title}
                       className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
                     />
                   </div>
                   <div className="space-y-3 p-5">
-                    <h3 className="text-lg font-semibold text-white">{project.title}</h3>
-                    <p className="text-xs text-cyan-300 font-medium uppercase tracking-widest">{project.subtitle}</p>
-                    <p className="text-sm text-slate-300">{project.desc}</p>
+                    <h3 className="text-lg font-semibold text-foreground">{project.title}</h3>
+                    <p className="text-xs text-accent font-medium uppercase tracking-widest">{project.subtitle}</p>
+                    <p className="text-sm text-muted">{project.desc}</p>
                     <div className="flex flex-wrap gap-2 pt-2">
                       {project.tags.map((tag) => (
-                        <span key={`${project.id}-${tag}`} className="rounded-full border border-white/15 bg-white/5 px-2 py-1 text-xs text-cyan-200">
+                        <span key={`${project.id}-${tag}`} className="rounded-full border border-white/15 bg-white/5 px-2 py-1 text-xs text-accent">
                           {tag}
                         </span>
                       ))}
@@ -475,19 +461,19 @@ export default function Home() {
       <section id="projects" className="mx-auto max-w-6xl border-t border-white/10 px-6 py-20">
         <Reveal>
           <h2 className="text-3xl font-bold tracking-tight">Projects</h2>
-          <p className="mt-2 text-slate-300">Selected builds from my work and learning.</p>
+          <p className="mt-2 text-muted">Selected builds from my work and learning.</p>
         </Reveal>
 
         <div className="mt-10 grid gap-5 md:grid-cols-2">
           {projects.map((project, index) => (
             <Reveal key={project.title} delay={index * 70}>
-              <article className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-6 transition duration-300 hover:-translate-y-1 hover:border-cyan-300/40">
-                <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/0 via-cyan-300/0 to-blue-400/0 transition group-hover:from-cyan-400/10 group-hover:via-transparent group-hover:to-blue-400/10" />
-                <h3 className="relative text-lg font-semibold text-white">{project.title}</h3>
-                <p className="relative mt-3 text-sm leading-relaxed text-slate-300">{project.desc}</p>
+              <article className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-6 transition duration-300 hover:-translate-y-1 hover:border-accent/40 hover:shadow-[0_20px_50px_rgba(242,163,61,0.15)]">
+                <div className="absolute inset-0 bg-gradient-to-br from-accent/0 via-accent/0 to-accent-strong/0 transition group-hover:from-accent/10 group-hover:via-transparent group-hover:to-accent-strong/10" />
+                <h3 className="relative text-lg font-semibold text-foreground">{project.title}</h3>
+                <p className="relative mt-3 text-sm leading-relaxed text-muted">{project.desc}</p>
                 <div className="relative mt-5 flex flex-wrap gap-2">
                   {project.tags.map((tag) => (
-                    <span key={`${project.title}-${tag}`} className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs text-cyan-200">
+                    <span key={`${project.title}-${tag}`} className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs text-accent">
                       {tag}
                     </span>
                   ))}
@@ -498,57 +484,30 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="experience" className="mx-auto max-w-6xl border-t border-white/10 px-6 py-20">
-        <Reveal>
-          <h2 className="text-3xl font-bold tracking-tight">Experience</h2>
-          <p className="mt-2 text-slate-300">Work and team experience that shaped my skills.</p>
-        </Reveal>
-
-        <div className="mt-10 grid gap-5">
-          {experience.map((job, index) => (
-            <Reveal key={job.role} delay={index * 80}>
-              <article className="rounded-2xl border border-white/10 bg-white/5 p-6">
-                <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
-                  <h3 className="text-lg font-semibold text-white">{job.role}</h3>
-                  <span className="inline-flex w-fit rounded-full border border-cyan-300/40 bg-cyan-300/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-cyan-200">
-                    {job.period}
-                  </span>
-                </div>
-                <ul className="mt-4 list-disc space-y-2 pl-5 text-sm text-slate-300">
-                  {job.points.map((point) => (
-                    <li key={point}>{point}</li>
-                  ))}
-                </ul>
-              </article>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
       <section id="achievements" className="mx-auto max-w-6xl border-t border-white/10 px-6 py-20">
         <Reveal>
           <h2 className="text-3xl font-bold tracking-tight">Featured Achievements</h2>
-          <p className="mt-2 text-slate-300">Highlights with strongest impact in academics and competitions.</p>
+          <p className="mt-2 text-muted">Highlights with strongest impact in academics and competitions.</p>
         </Reveal>
 
         <div className="mt-8 grid gap-6 md:grid-cols-3">
           {featuredAchievements.map((item, index) => (
             <Reveal key={item.title} delay={index * 90}>
-              <article className="group overflow-hidden rounded-2xl border border-white/10 bg-white/5 transition duration-300 hover:-translate-y-1 hover:border-cyan-300/40">
+              <article className="group overflow-hidden rounded-2xl border border-white/10 bg-white/5 transition duration-300 hover:-translate-y-1 hover:border-accent/40 hover:shadow-[0_20px_50px_rgba(242,163,61,0.15)]">
                 <div className="relative h-44 overflow-hidden">
                   <img
                     src={item.img}
                     alt={item.title}
                     className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
                   />
-                  <span className="absolute left-3 top-3 rounded-full bg-slate-900/80 px-3 py-1 text-xs font-semibold text-cyan-200">
+                  <span className="absolute left-3 top-3 rounded-full bg-background/80 px-3 py-1 text-xs font-semibold text-accent">
                     {item.year}
                   </span>
                 </div>
                 <div className="space-y-3 p-5">
-                  <h3 className="text-lg font-semibold text-white">{item.title}</h3>
-                  <p className="text-sm text-slate-300">{item.subtitle}</p>
-                  <div className="inline-flex rounded-full border border-emerald-300/30 bg-emerald-300/10 px-3 py-1 text-xs font-semibold text-emerald-200">
+                  <h3 className="text-lg font-semibold text-foreground">{item.title}</h3>
+                  <p className="text-sm text-muted">{item.subtitle}</p>
+                  <div className="inline-flex rounded-full border border-accent/30 bg-accent/10 px-3 py-1 text-xs font-semibold text-accent">
                     {item.impact}
                   </div>
                 </div>
@@ -561,7 +520,7 @@ export default function Home() {
           <ul className="mt-8 grid gap-3 md:grid-cols-2">
             {achievements.map((item, index) => (
               <Reveal key={item} delay={index * 30}>
-                <li className="rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-slate-200">{item}</li>
+                <li className="rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-foreground/90">{item}</li>
               </Reveal>
             ))}
           </ul>
@@ -571,7 +530,7 @@ export default function Home() {
       <section id="skills" className="mx-auto max-w-6xl border-t border-white/10 px-6 py-20">
         <Reveal>
           <h2 className="text-3xl font-bold tracking-tight">Skills</h2>
-          <p className="mt-2 text-slate-300">Technical depth by category with current proficiency levels.</p>
+          <p className="mt-2 text-muted">Technical depth by category with current proficiency levels.</p>
         </Reveal>
 
         <div className="mt-8 grid gap-4 md:grid-cols-2">
@@ -584,12 +543,12 @@ export default function Home() {
       <section id="contact" className="mx-auto max-w-6xl border-t border-white/10 px-6 py-20">
         <Reveal>
           <h2 className="text-3xl font-bold tracking-tight">Contact</h2>
-          <p className="mt-2 text-slate-300">Open for collaborations, internships, and software projects.</p>
+          <p className="mt-2 text-muted">Open for collaborations, internships, and software projects.</p>
         </Reveal>
 
         <Reveal delay={120} className="mt-7 flex flex-wrap gap-3">
           <a
-            className="rounded-xl border border-white/20 bg-white/5 px-4 py-2 transition hover:border-cyan-300/60"
+            className="rounded-xl border border-white/20 bg-white/5 px-4 py-2 transition hover:border-accent/60"
             href="https://www.linkedin.com/in/hazriq-haykal-251a32294?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
             target="_blank"
             rel="noopener noreferrer"
@@ -597,14 +556,14 @@ export default function Home() {
             LinkedIn
           </a>
           <a
-            className="rounded-xl border border-white/20 bg-white/5 px-4 py-2 transition hover:border-cyan-300/60"
+            className="rounded-xl border border-white/20 bg-white/5 px-4 py-2 transition hover:border-accent/60"
             href="/resume.pdf"
             download
           >
             Download Resume
           </a>
           <a
-            className="rounded-xl bg-cyan-300 px-4 py-2 font-semibold text-slate-900 transition hover:shadow-[0_0_30px_rgba(103,232,249,0.4)]"
+            className="cta-glow rounded-xl bg-accent px-4 py-2 font-semibold text-background transition hover:shadow-[0_0_30px_rgba(242,163,61,0.45)]"
             href="mailto:hazriqhaykal04@gmail.com"
           >
             Email Me
@@ -621,7 +580,7 @@ export default function Home() {
 
 
 
-        <footer className="mt-14 pb-4 text-sm text-slate-400">
+        <footer className="mt-14 pb-4 text-sm text-muted">
           {new Date().getFullYear()} Hazriq Haykal Norrol Farhan. All rights reserved.
         </footer>
       </section>

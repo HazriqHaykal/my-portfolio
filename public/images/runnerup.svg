@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="160" viewBox="0 0 240 160">
+  <rect width="240" height="160" rx="12" fill="#0B1220" />
+  <rect x="16" y="24" width="80" height="112" rx="8" fill="#7C3AED" />
+  <text x="112" y="70" fill="#fff" font-family="Arial" font-size="14">CIC ASIA</text>
+  <text x="112" y="92" fill="#9CA3AF" font-family="Arial" font-size="12">Runner-up Winner</text>
+</svg>

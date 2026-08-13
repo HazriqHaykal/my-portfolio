@@ -1,0 +1,268 @@
+@import "tailwindcss";
+
+:root {
+  --background: #080d1a;
+  --surface: #111831;
+  --surface-soft: #171f3d;
+  --foreground: #e6edf8;
+  --muted: #9eabc7;
+  --accent-a: #64f1d2;
+  --accent-b: #66a7ff;
+  --accent-c: #ff9e6a;
+  --card-border: rgba(255, 255, 255, 0.14);
+  --shadow: 0 18px 60px rgba(4, 8, 22, 0.52);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-manrope);
+  --font-mono: var(--font-geist-mono);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(circle at 12% 8%, rgba(102, 167, 255, 0.2), transparent 34%),
+    radial-gradient(circle at 85% 3%, rgba(255, 158, 106, 0.16), transparent 32%),
+    linear-gradient(160deg, #050914 0%, #0b1124 45%, #111732 100%);
+  color: var(--foreground);
+  font-family: var(--font-manrope), "Segoe UI", sans-serif;
+  overflow-x: hidden;
+}
+
+.display-font {
+  font-family: var(--font-space-grotesk), "Segoe UI", sans-serif;
+}
+
+.site-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+}
+
+.mesh {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(44px);
+  opacity: 0.42;
+  animation: floatMesh 18s ease-in-out infinite;
+}
+
+.mesh-one {
+  width: 340px;
+  height: 340px;
+  left: -80px;
+  top: -44px;
+  background: radial-gradient(circle, rgba(100, 241, 210, 0.46), rgba(100, 241, 210, 0));
+}
+
+.mesh-two {
+  width: 420px;
+  height: 420px;
+  right: -110px;
+  top: 130px;
+  background: radial-gradient(circle, rgba(102, 167, 255, 0.48), rgba(102, 167, 255, 0));
+  animation-duration: 24s;
+  animation-direction: reverse;
+}
+
+.mesh-three {
+  width: 300px;
+  height: 300px;
+  left: 40%;
+  bottom: -90px;
+  background: radial-gradient(circle, rgba(255, 158, 106, 0.35), rgba(255, 158, 106, 0));
+  animation-duration: 20s;
+}
+
+.noise {
+  position: absolute;
+  inset: 0;
+  opacity: 0.05;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.85) 0.5px, transparent 0.5px);
+  background-size: 2.4px 2.4px;
+}
+
+.progress-track {
+  background: linear-gradient(90deg, rgba(100, 241, 210, 0.16), rgba(102, 167, 255, 0.16));
+}
+
+.progress-fill {
+  background: linear-gradient(90deg, var(--accent-a), var(--accent-b), var(--accent-c));
+  box-shadow: 0 0 26px rgba(102, 167, 255, 0.55);
+}
+
+.nav-link {
+  position: relative;
+  border-radius: 9999px;
+  padding: 0.42rem 0.74rem;
+  color: var(--muted);
+  transition: color 200ms ease, background-color 200ms ease, transform 200ms ease;
+}
+
+.nav-link:hover {
+  color: var(--foreground);
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-1px);
+}
+
+.nav-link-active {
+  color: #0c1225;
+  background: linear-gradient(90deg, var(--accent-a), #9bc2ff);
+  box-shadow: 0 8px 26px rgba(100, 241, 210, 0.35);
+}
+
+.hero-title {
+  background: linear-gradient(120deg, #f8fbff 0%, #bcecff 46%, #ffd7c2 100%);
+  background-size: 180% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: titleShift 7s linear infinite;
+}
+
+.glass-card {
+  border: 1px solid var(--card-border);
+  border-radius: 1.25rem;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+  backdrop-filter: blur(14px);
+  box-shadow: var(--shadow);
+  transition: transform 260ms ease, border-color 260ms ease, box-shadow 260ms ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(100, 241, 210, 0.45);
+  box-shadow: 0 28px 60px rgba(7, 11, 28, 0.62);
+}
+
+.accent-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: linear-gradient(120deg, var(--accent-a), var(--accent-b));
+  box-shadow: 0 0 16px rgba(100, 241, 210, 0.8);
+}
+
+.chip {
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.06);
+  color: #d6e6ff;
+}
+
+.chip-float {
+  animation: chipFloat 4s ease-in-out infinite;
+}
+
+.section-title {
+  letter-spacing: -0.02em;
+}
+
+.soft-line {
+  height: 1px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(157, 190, 255, 0.35), rgba(255, 255, 255, 0));
+}
+
+.timeline-point {
+  box-shadow: 0 0 0 0 rgba(100, 241, 210, 0.7);
+  animation: pingSoft 2.8s ease-out infinite;
+}
+
+.cta-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-140%) skewX(-20deg);
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.42), rgba(255, 255, 255, 0));
+  transition: transform 520ms ease;
+}
+
+.cta-button:hover::before {
+  transform: translateX(140%) skewX(-20deg);
+}
+
+.spark {
+  position: absolute;
+  top: 82%;
+  width: 2px;
+  height: 2px;
+  border-radius: 9999px;
+  background: rgba(100, 241, 210, 0.95);
+  box-shadow: 0 0 8px rgba(100, 241, 210, 0.8);
+  animation: sparkRise 5s linear infinite;
+}
+
+@keyframes titleShift {
+  to {
+    background-position: 180% center;
+  }
+}
+
+@keyframes chipFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes floatMesh {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(20px, -16px, 0) scale(1.08);
+  }
+}
+
+@keyframes sparkRise {
+  0% {
+    opacity: 0;
+    transform: translateY(24px) scale(0.8);
+  }
+  15% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-240px) scale(1.1);
+  }
+}
+
+@keyframes pingSoft {
+  0% {
+    box-shadow: 0 0 0 0 rgba(100, 241, 210, 0.75);
+  }
+  80% {
+    box-shadow: 0 0 0 12px rgba(100, 241, 210, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mesh,
+  .chip-float,
+  .timeline-point,
+  .spark,
+  .hero-title,
+  .cta-button::before {
+    animation: none !important;
+    transition: none !important;
+  }
+}

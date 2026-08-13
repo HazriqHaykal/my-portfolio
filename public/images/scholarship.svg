@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="160" viewBox="0 0 240 160">
+  <rect width="240" height="160" rx="12" fill="#111827" />
+  <circle cx="56" cy="80" r="32" fill="#F59E0B" />
+  <text x="120" y="60" fill="#fff" font-family="Arial" font-size="14">Recipiented Scholarship</text>
+  <text x="120" y="86" fill="#9CA3AF" font-family="Arial" font-size="12">by NNPBN</text>
+</svg>

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="160" viewBox="0 0 240 160">
+  <rect width="240" height="160" rx="12" fill="#071124" />
+  <polygon points="40,120 80,32 120,120" fill="#06B6D4" />
+  <text x="140" y="70" fill="#fff" font-family="Arial" font-size="14">Foseal Hackathon</text>
+  <text x="140" y="92" fill="#9CA3AF" font-family="Arial" font-size="12">Participant / Winner</text>
+</svg>
